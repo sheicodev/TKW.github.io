@@ -19,6 +19,7 @@ header {
     padding: 50px 0;
     height: 100px;
     background-image: url("images/music.jpg");
+    width: 100%;
 }
 .banner{
     background-color:  #fffbe1;
@@ -259,6 +260,7 @@ a:active {
     color: blue;
 }
 .pagination{
+    width: 100%;
     text-align: center;
 }
 .pagination a{
@@ -281,6 +283,7 @@ a:active {
     color: #fff;
     padding: 15px 30px;
     font-family: Arial, sans-serif;
+    width: 100%;
 }
 
 .footer-content {
