@@ -276,9 +276,36 @@ a:active {
     background-color: hsl(0, 0%, 70%);
     border-radius: 5px;
 }
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #0073e6;
-    color: white;
+.footer {
+    background-color: #222;
+    color: #fff;
+    padding: 15px 30px;
+    font-family: Arial, sans-serif;
 }
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-content .left {
+    text-align: left;
+    flex: 1;
+}
+
+.footer-content .right {
+    text-align: right;
+}
+
+.footer-content a {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-content a:hover {
+    text-decoration: underline;
+}
+
