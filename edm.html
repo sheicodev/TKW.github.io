@@ -285,9 +285,13 @@
             logoutBtn.style.display = "none";
 
             document.querySelectorAll(".favorite-btn").forEach(btn => btn.style.display = "none");
+            document.querySelectorAll(".favorite-text").forEach(text => text.style.display = "none");
+
             const favLink = document.getElementById("favoriteLink");
             if (favLink) favLink.style.display = "none";
-        } else {
+        }
+
+        else {
             document.getElementById("usernameDisplay").innerText = `${username}`;
             loginBtn.style.display = "none";
             logoutBtn.style.display = "inline-block";
@@ -325,6 +329,13 @@
                 const artistName = btn.getAttribute("data-name");
                 const isFavorited = favorites.some(artist => artist.name === artistName);
                 btn.innerText = isFavorited ? '❤️' : '🤍';
+
+                // Nếu có user thì hiện nút + dòng chữ
+                if (username) {
+                    btn.style.display = "inline-block";
+                    const textElement = btn.previousElementSibling;
+                    if (textElement) textElement.style.display = "inline";
+                }
             });
         });
     </script>  
