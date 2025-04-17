@@ -283,7 +283,8 @@ a:active {
 .textcontent{
     padding: 10px;
     color: #534e4e;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     gap: 5px;
     width: 100%;
     overflow: hidden;
