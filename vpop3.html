@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MUSIC IN MY SOUL</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/mind-meld" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -12,6 +13,22 @@
             <h3>Hãy Chọn Âm Nhạc Của Riêng Bạn</h1>
         </div>
     </header>
+    <div class="search-container">
+        <div class="logo">
+            YINYUE
+        </div> 
+        
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Nhập tên nghệ sĩ...">
+          <button onclick="searchArtist()">Tìm kiếm</button>
+        </div>
+        
+        <div class="user-info">
+            <span id="usernameDisplay"></span>
+            <button id="loginBtn" onclick="login()">Đăng nhập</button>
+            <button id="logoutBtn" onclick="logout()">Đăng xuất</button>
+          </div>
+      </div>
     <main class="container">
         <aside class="sidebar">
             <a href="rock.html" ><div class="category">Rock</div></a>
@@ -26,7 +43,7 @@
                 </div>
             </div>
             <a href="edm.html"><div class="category">EDM</div></a>
-            
+            <a href="favorite.html" id="favoriteLink"><div class="category">Nghệ sĩ yêu thích</div></a>
         </aside>
 
         <section class="container">
@@ -40,6 +57,10 @@
                         </div>
                         <div class="name vpop">
                             <h3>AMEE</h3></a>
+                            <div class="favorite-container">
+                                <span class="favorite-text">Thêm vào danh sách ưa thích</span> 
+                                <button class="favorite-btn" data-name="AMEE" onclick="toggleFavorite('AMEE', 'images/AMEE.jfif', 'https://open.spotify.com/artist/2aQnC3DbZB9GbauvhAw7ve', this)"> 🤍 </button> 
+                            </div>
                         </div>
                     <div class="boxbelow">
                         <ul>
@@ -81,7 +102,7 @@
                     </div>
                 </div>
                 <div class="box">
-                    <a href="https://open.spotify.com/artist/2aQnC3DbZB9GbauvhAw7ve" target="_blank">
+                    <a href="https://open.spotify.com/artist/1BcjfrXV4Oe3fK0c8dnxFF" target="_blank">
                         <div class="boxabove">
                             <div class="image">
                                 <img src="images/Phương Mỹ Chi.webp" alt="">
@@ -89,11 +110,15 @@
                         </div>
                         <div class="name vpop">
                             <h3>Phương Mỹ Chi</h3></a>
+                            <div class="favorite-container">
+                                <span class="favorite-text">Thêm vào danh sách ưa thích</span> 
+                                <button class="favorite-btn" data-name="Phương Mỹ Chi" onclick="toggleFavorite('Phương Mỹ Chi', 'images/Phương Mỹ Chi.webp', 'https://open.spotify.com/artist/1BcjfrXV4Oe3fK0c8dnxFF', this)"> 🤍 </button> 
+                            </div>
                         </div>
                     <div class="boxbelow">
                         <ul>
                             <li>Số Follower Trên Spotify</li>
-                                <div class="textcontent" id="2aQnC3DbZB9GbauvhAw7ve">
+                                <div class="textcontent" id="1BcjfrXV4Oe3fK0c8dnxFF">
                                     <h5 class="stream"></h5>
                                 </div>
                             <li>Các Tác Phẩm Nổi Bật</li>
@@ -138,6 +163,10 @@
                         </div>
                         <div class="name vpop">
                             <h3>Mỹ Tâm</h3></a>
+                            <div class="favorite-container">
+                                <span class="favorite-text">Thêm vào danh sách ưa thích</span> 
+                                <button class="favorite-btn" data-name="Mỹ Tâm" onclick="toggleFavorite('Mỹ Tâm', 'images/Mỹ Tâm', 'https://open.spotify.com/artist/1CWwyDPjCowRTO4p6A7r6g', this)"> 🤍 </button> 
+                            </div>
                         </div>
                     <div class="boxbelow">
                         <ul>
@@ -187,6 +216,10 @@
                         </div>
                         <div class="name vpop">
                             <h3>Pháo</h3></a>
+                            <div class="favorite-container">
+                                <span class="favorite-text">Thêm vào danh sách ưa thích</span> 
+                                <button class="favorite-btn" data-name="Pháo" onclick="toggleFavorite('Pháo', 'images/Pháo.jfif', 'https://open.spotify.com/artist/4en2ObzSYlIYbCGknXjgG9', this)"> 🤍 </button> 
+                            </div>
                         </div>
                     <div class="boxbelow">
                         <ul>
@@ -231,6 +264,60 @@
         </section>
     </main>
     <script src="script.js"></script>
+    <script>
+        const username = localStorage.getItem("loggedInUser");
+        const loginBtn = document.getElementById("loginBtn");
+        const logoutBtn = document.getElementById("logoutBtn");
+    
+        if (!username) {
+            document.getElementById("usernameDisplay").innerText = "";
+            loginBtn.style.display = "inline-block";
+            logoutBtn.style.display = "none";
+
+            document.querySelectorAll(".favorite-btn").forEach(btn => btn.style.display = "none");
+            const favLink = document.getElementById("favoriteLink");
+            if (favLink) favLink.style.display = "none";
+        } else {
+            document.getElementById("usernameDisplay").innerText = `${username}`;
+            loginBtn.style.display = "none";
+            logoutBtn.style.display = "inline-block";
+        }
+    
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            window.location.href = "rock.html";
+        }
+    
+        function login() {
+            window.location.href = "login.html";
+        }
+
+        // xử lý favorite artist
+        function toggleFavorite(name, imgSrc, link, btn) {
+            let favorites = JSON.parse(localStorage.getItem("favoriteArtists") || "[]");
+
+            const exists = favorites.some(artist => artist.name === name);
+            if (exists) {
+                favorites = favorites.filter(artist => artist.name !== name);
+                btn.innerText = '🤍';
+            } else {
+                favorites.push({ name, imgSrc, link });
+                btn.innerText = '❤️';
+            }
+
+            localStorage.setItem("favoriteArtists", JSON.stringify(favorites));
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const favorites = JSON.parse(localStorage.getItem("favoriteArtists") || "[]");
+
+            document.querySelectorAll(".favorite-btn").forEach(btn => {
+                const artistName = btn.getAttribute("data-name");
+                const isFavorited = favorites.some(artist => artist.name === artistName);
+                btn.innerText = isFavorited ? '❤️' : '🤍';
+            });
+        });
+    </script>   
     <div class="pagination">
         <a href="vpop2.html"><</a>
         <a href="vpop.html">1</a>
@@ -241,16 +328,19 @@
         <a href="vpop4.html">></a>
     </div>
 <footer class="footer">
-        <div class="footer-content">
-            <div class="left">
-                © 2025 Sheico
-            </div>
-            <div class="right">
-                <div class="right">
-                    <p><strong>Liên Hệ:</strong> <a href="mailto:bao13a11@example.com" target="_blank">Email</a> | <a href="https://www.facebook.com/gia.bao.643113" target="_blank">Facebook</a></p>
-                </div>                
-            </div>
+    <div class="footer-content">
+        <div class="left">
+            © 2025 Sheico
         </div>
+        <div class="right">
+            <div class="right">
+                <p><strong>Liên Hệ:</strong> <a href="mailto:bao13a11@example.com" target="_blank">Email</a> 
+                    | <a href="https://www.facebook.com/gia.bao.643113" target="_blank">Facebook</a>
+                    | <a href="https://github.com/sheicodev" target="_blank">Github</a>
+                </p>
+            </div>                
+        </div>
+    </div>
     </footer>
 </body>
 </html>

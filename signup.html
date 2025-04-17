@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng Ký</title>
+  <link rel="stylesheet" href="style-login.css">
+</head>
+<body>
+  <div class="container">
+    <div class="music-icon">🎧</div>
+    <h2>Đăng Ký Tài Khoản</h2>
+    <input type="text" id="newUsername" placeholder="Tên đăng nhập">
+    <input type="password" id="newPassword" placeholder="Mật khẩu">
+    <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu">
+    <button onclick="signup()">Đăng Ký</button>
+    <p>Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+  </div>
+
+  <script>
+    function signup() {
+      const username = document.getElementById("newUsername").value;
+      const password = document.getElementById("newPassword").value;
+      const confirm = document.getElementById("confirmPassword").value;
+
+      if (password !== confirm) {
+        alert("Mật khẩu xác nhận không khớp.");
+        return;
+      }
+
+      if (!username || !password) {
+        alert("Vui lòng nhập đầy đủ thông tin.");
+        return;
+      }
+
+      if (localStorage.getItem(username)) {
+        alert("Tên người dùng đã tồn tại.");
+        return;
+      }
+
+      localStorage.setItem(username, password);
+      alert("Đăng ký thành công! Bạn có thể đăng nhập ngay.");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

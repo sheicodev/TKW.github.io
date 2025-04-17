@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Nghệ sĩ yêu thích</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fef9e7;
+      margin: 0;
+      padding: 20px 40px; /* Tăng padding hai bên */
+    }
+
+    h1 {
+      text-align: center;
+      color: #d6336c;
+    }
+
+    .favorites-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Thay auto-fit bằng auto-fill */
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .artist-card {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      padding-bottom: 15px;
+      transition: transform 0.2s ease;
+    }
+
+    .artist-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .artist-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 2px solid #eee;
+    }
+
+    .artist-name {
+      font-size: 1.2rem;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎧 Nghệ sĩ bạn yêu thích</h1>
+  <div class="favorites-container" id="favoritesContainer"></div>
+
+  <script>
+    const container = document.getElementById("favoritesContainer");
+    const favorites = JSON.parse(localStorage.getItem("favoriteArtists") || "[]");
+
+    if (favorites.length === 0) {
+      container.innerHTML = "<p style='text-align:center; width:100%;'>Bạn chưa thêm nghệ sĩ nào vào danh sách yêu thích 💔</p>";
+    } else {
+      favorites.forEach(artist => {
+        const card = document.createElement("div");
+        card.className = "artist-card";
+        card.innerHTML = `
+          <img src="${artist.imgSrc}" alt="${artist.name}">
+          <div class="artist-name">${artist.name}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

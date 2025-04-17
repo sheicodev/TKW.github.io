@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng Nhập</title>
+  <link rel="stylesheet" href="style-login.css">
+</head>
+<body>
+  <div class="container">
+    <div class="music-icon">🎧</div>
+    <h2>Đăng Nhập Tài Khoản</h2>
+    <input type="text" id="username" placeholder="Tên đăng nhập">
+    <input type="password" id="password" placeholder="Mật khẩu">
+    <button onclick="login()">Đăng Nhập</button>
+    <p>Chưa có tài khoản? <a href="signup.html">Đăng ký</a></p>
+  </div>
+
+  <script>
+    function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const storedPassword = localStorage.getItem(username);
+    if (storedPassword === password) {
+        localStorage.setItem("loggedInUser", username); 
+        alert("Đăng nhập thành công!");
+        window.location.href = "rock.html"; 
+    } else {
+        alert("Tên đăng nhập hoặc mật khẩu sai!");
+    }
+    }
+
+  </script>
+</body>
+</html>

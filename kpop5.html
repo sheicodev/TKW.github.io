@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.cdnfonts.com/css/magical-mystery-tour-outline-shadow" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/janda-curlygirl-chunky" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/mind-meld" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -14,6 +15,22 @@
             <h3>Hãy Chọn Âm Nhạc Của Riêng Bạn</h1>
         </div>
     </header>
+    <div class="search-container">
+        <div class="logo">
+            YINYUE
+        </div> 
+        
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Nhập tên nghệ sĩ...">
+          <button onclick="searchArtist()">Tìm kiếm</button>
+        </div>
+        
+        <div class="user-info">
+            <span id="usernameDisplay"></span>
+            <button id="loginBtn" onclick="login()">Đăng nhập</button>
+            <button id="logoutBtn" onclick="logout()">Đăng xuất</button>
+          </div>
+      </div>
     <main class="container">
         <aside class="sidebar">
             <a href="rock.html" ><div class="category">Rock</div></a>
@@ -28,6 +45,7 @@
                 </div>
             </div>
             <a href="edm.html"><div class="category">EDM</div></a>
+            <a href="favorite.html" id="favoriteLink"><div class="category">Nghệ sĩ yêu thích</div></a>
         </aside>
 
         <section class="container">
@@ -41,6 +59,10 @@
                         </div>
                         <div class="name pop">
                             <h3>IU</h3></a>
+                            <div class="favorite-container">
+                                <span class="favorite-text">Thêm vào danh sách ưa thích</span> 
+                                <button class="favorite-btn" data-name="IU" onclick="toggleFavorite('IU', 'images/IU.webp', 'https://open.spotify.com/artist/3HqSLMAZ3g3d5poNaI7GOU', this)"> 🤍 </button> 
+                            </div> 
                         </div>
                     <div class="boxbelow">
                         <ul>
@@ -90,6 +112,10 @@
                         </div>
                         <div class="name pop">
                             <h3>aespa</h3></a>
+                            <div class="favorite-container">
+                                <span class="favorite-text">Thêm vào danh sách ưa thích</span> 
+                                <button class="favorite-btn" data-name="aespa" onclick="toggleFavorite('aespa', 'images/aespa.jpg', 'https://open.spotify.com/artist/6YVMFz59CuY7ngCxTxjpxE', this)"> 🤍 </button> 
+                            </div> 
                         </div>
                     <div class="boxbelow">
                         <ul>
@@ -139,6 +165,10 @@
                         </div>
                         <div class="name pop">
                             <h3>ENHYPEN</h3></a>
+                            <div class="favorite-container">
+                                <span class="favorite-text">Thêm vào danh sách ưa thích</span> 
+                                <button class="favorite-btn" data-name="ENHYPEN" onclick="toggleFavorite('ENHYPEN', 'images/ENHYPEN.jpg', 'https://open.spotify.com/artist/5t5FqBwTcgKTaWmfEbwQY9', this)"> 🤍 </button> 
+                            </div> 
                         </div>
                     <div class="boxbelow">
                         <ul>
@@ -188,6 +218,10 @@
                         </div>
                         <div class="name pop">
                             <h3>ATEEZ</h3></a>
+                            <div class="favorite-container">
+                                <span class="favorite-text">Thêm vào danh sách ưa thích</span> 
+                                <button class="favorite-btn" data-name="ATEEZ" onclick="toggleFavorite('ATEEZ', 'images/ATEEZ.jfif', 'https://open.spotify.com/artist/68KmkJeZGfwe1OUaivBa2L', this)"> 🤍 </button> 
+                            </div> 
                         </div>
                     <div class="boxbelow">
                         <ul>
@@ -232,6 +266,60 @@
         </section>
     </main>
     <script src="script.js"></script>
+    <script>
+        const username = localStorage.getItem("loggedInUser");
+        const loginBtn = document.getElementById("loginBtn");
+        const logoutBtn = document.getElementById("logoutBtn");
+    
+        if (!username) {
+            document.getElementById("usernameDisplay").innerText = "";
+            loginBtn.style.display = "inline-block";
+            logoutBtn.style.display = "none";
+
+            document.querySelectorAll(".favorite-btn").forEach(btn => btn.style.display = "none");
+            const favLink = document.getElementById("favoriteLink");
+            if (favLink) favLink.style.display = "none";
+        } else {
+            document.getElementById("usernameDisplay").innerText = `${username}`;
+            loginBtn.style.display = "none";
+            logoutBtn.style.display = "inline-block";
+        }
+    
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            window.location.href = "rock.html";
+        }
+    
+        function login() {
+            window.location.href = "login.html";
+        }
+
+        // xử lý favorite artist
+        function toggleFavorite(name, imgSrc, link, btn) {
+            let favorites = JSON.parse(localStorage.getItem("favoriteArtists") || "[]");
+
+            const exists = favorites.some(artist => artist.name === name);
+            if (exists) {
+                favorites = favorites.filter(artist => artist.name !== name);
+                btn.innerText = '🤍';
+            } else {
+                favorites.push({ name, imgSrc, link });
+                btn.innerText = '❤️';
+            }
+
+            localStorage.setItem("favoriteArtists", JSON.stringify(favorites));
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const favorites = JSON.parse(localStorage.getItem("favoriteArtists") || "[]");
+
+            document.querySelectorAll(".favorite-btn").forEach(btn => {
+                const artistName = btn.getAttribute("data-name");
+                const isFavorited = favorites.some(artist => artist.name === artistName);
+                btn.innerText = isFavorited ? '❤️' : '🤍';
+            });
+        });
+    </script>   
     <div class="pagination">
         <a href="kpop4.html"><</a>
         <a href="kpop.html" >1</a>
@@ -242,7 +330,19 @@
         <a href="kpop5.html">></a>
     </div>
     <footer id="lienhe">
-        <p>Liên hệ: Facebook | LinkedIn | GitHub</p>
+        <div class="footer-content">
+            <div class="left">
+                © 2025 Sheico
+            </div>
+            <div class="right">
+                <div class="right">
+                    <p><strong>Liên Hệ:</strong> <a href="mailto:bao13a11@example.com" target="_blank">Email</a> 
+                        | <a href="https://www.facebook.com/gia.bao.643113" target="_blank">Facebook</a>
+                        | <a href="https://github.com/sheicodev" target="_blank">Github</a>
+                    </p>
+                </div>                
+            </div>
+        </div>
     </footer>
 </body>
 </html>

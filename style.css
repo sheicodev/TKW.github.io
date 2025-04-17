@@ -3,11 +3,14 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+#usernameDisplay {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    color: #ff2121; 
+}
 body {
     background-color: #fffbe1;
     color: #333;
-
 }
 
 header {
@@ -21,6 +24,66 @@ header {
     background-image: url("images/music.jpg");
     width: 100%;
 }
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 60px;
+    position: relative;
+    margin: 10px;
+}
+
+.logo {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    font-family: 'Mind Meld', sans-serif;
+}
+
+.search-box {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.user-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+.search-container input {
+    padding: 10px;
+    width: 300px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-container button:hover {
+    background-color: #555;
+}
+
 .banner{
     background-color:  #fffbe1;
     font-size: 1.5em;
@@ -30,6 +93,7 @@ header {
     width: 35%;
 }
 @import url('https://fonts.cdnfonts.com/css/jf-rock');
+@import url('https://fonts.cdnfonts.com/css/mind-meld');
 @import url('https://fonts.cdnfonts.com/css/street-shade');
 @import url('https://fonts.cdnfonts.com/css/janda-curlygirl-chunky');
 @import url('https://fonts.cdnfonts.com/css/amuse-bouche');
@@ -63,7 +127,7 @@ header {
 }
 
 .sidebar {
-    width: 15%;
+    width: 5%;
     background-color: #fffbe1;
     display: flex;
     flex-direction: column;
@@ -134,7 +198,7 @@ header {
 .box {
     width: 25%; 
     background: white;
-    padding: 15px;
+    padding: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     text-align: justify;
     border-radius: 20px;
@@ -144,7 +208,19 @@ header {
     flex-direction: column;
     overflow: hidden; 
 }
+.favorite-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
 
+.favorite-text {
+    font-size: 14px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin-left: 60px;
+}
 .boxabove {
     display: flex;
     justify-content: space-between;
@@ -184,7 +260,7 @@ a:active {
     text-indent: 10px;
     margin-left: 15px;
     background: white;
-    margin-top: 10px;
+    margin-top: 0px;
     padding-left: 15px;
     text-align: justify;
     line-height: 1.6;
@@ -207,9 +283,8 @@ a:active {
 .textcontent{
     padding: 10px;
     color: #534e4e;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    display: grid;
+    gap: 5px;
     width: 100%;
     overflow: hidden;
 }
@@ -217,7 +292,7 @@ a:active {
 .boxcontent1 {
     display: flex;
     align-items: center;
-    flex: 1 1 100%; 
+    flex: 1 1 100%;
     min-width: 200px; 
     min-height: 60px;
     background: #f4f4f4;
@@ -234,8 +309,6 @@ a:active {
     height: 50px;
     overflow: hidden; 
     display: flex;
-    justify-content: center;
-    align-items: center;
     background: #ddd; 
     border-radius: 5px;
 }
